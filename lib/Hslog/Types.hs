@@ -27,7 +27,7 @@ data Clause
   | Rule Head Body
   deriving (Eq, Show)
 
--- (Functor { fname :: Atom, argsLen :: Int })
+-- (Functor { fname :: Atom, arity :: Int })
 data Funct = Funct Atom Int deriving (Eq, Ord)
 
 instance Show Funct where
@@ -58,3 +58,9 @@ instance Generator Term where
 getClauseHead :: Clause -> Head
 getClauseHead (Fact hd) = hd
 getClauseHead (Rule hd _) = hd
+
+showTypeOfTerm :: Term -> String
+showTypeOfTerm TAtom{} = "(an atom)"
+showTypeOfTerm TNum{} = "(a number)"
+showTypeOfTerm TVar{} = "(a variable)"
+showTypeOfTerm TComp{} = "(a compound term)"

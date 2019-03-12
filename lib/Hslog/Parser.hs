@@ -17,7 +17,7 @@ sc :: Parser ()
 sc = L.space space1 lineCmnt blockCmnt
   where
     lineCmnt = L.skipLineComment "%"
-    blockCmnt = L.skipBlockComment "/*" "*/" -- Correct in SWI-Prolog
+    blockCmnt = L.skipBlockComment "/*" "*/"
 
 lexeme :: Parser a -> Parser a
 lexeme = L.lexeme sc
@@ -44,6 +44,8 @@ atom =
 
 num :: Parser Int
 num = lexeme $ L.signed sc L.decimal
+
+-- TODO: Special anonymous variables
 
 var :: Parser Var
 var = lexeme $ do

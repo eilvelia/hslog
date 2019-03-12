@@ -25,6 +25,9 @@ dependencies:
 - containers
 - transformers
 
+ghc-options:
+- -Wincomplete-patterns
+
 library:
   source-dirs: lib
 

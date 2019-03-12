@@ -4,14 +4,16 @@ Prolog (its pure subset) interpreter in Haskell, written just for fun.
 
 ### Features
 
-- [ ] Basic implementation
+- [x] Basic implementation
 - [ ] Backtracking
 - [ ] Non-determinism
 - [x] REPL
 - [x] List notation
 - [x] Infix notation
 - [ ] Arithmetic operators
+- [ ] Cut symbol
 - [ ] User-defined operators
+- ...
 
 ---
 
