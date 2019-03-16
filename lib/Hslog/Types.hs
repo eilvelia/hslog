@@ -3,9 +3,6 @@ module Hslog.Types where
 import Data.List (intercalate)
 import Hslog.Misc (validChars)
 
-class Generator a where
-  gen :: a -> String
-
 newtype Atom = Atom String deriving (Eq, Show, Ord)
 newtype Var = Var String deriving (Eq, Show, Ord)
 
@@ -35,6 +32,9 @@ instance Show Funct where
 
 newtype Query = Query Term deriving (Eq, Show)
 
+class Generator a where
+  gen :: a -> String
+
 instance Generator Atom where
   gen (Atom name) =
     let (hd : rest) = name in
@@ -54,6 +54,19 @@ instance Generator Term where
   gen (TNum n) = show n
   gen (TVar v) = gen v
   gen (TComp c) = gen c
+
+instance Generator Head where
+  gen (Head f args) =
+    case args of
+      [] -> gen f
+      _ -> gen (Compound f args)
+
+instance Generator Body where
+  gen (Body t) = gen t
+
+instance Generator Clause where
+  gen (Fact hd) = gen hd ++ "."
+  gen (Rule hd bd) = gen hd ++ " :- " ++ gen bd ++ "."
 
 getClauseHead :: Clause -> Head
 getClauseHead (Fact hd) = hd

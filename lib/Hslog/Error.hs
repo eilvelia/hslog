@@ -24,4 +24,4 @@ instance Show HslogError where
     UnknownPredicate f ->
       "Unknown predicate " ++ show f
     MultipleErrors errs ->
-      intercalate " | " (map show errs)
+      "(" ++ intercalate " | " (map show errs) ++ ")"

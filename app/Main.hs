@@ -28,15 +28,10 @@ repl' kb = do
   ast <- exceptT $ parse P.query "repl" input
     |> first (\err -> "ParseError: " ++ parseErrorPretty err)
   lift $ putStrLn $ "  AST: " ++ show ast
-  substs <- exceptT $ solveL kb ast
+  substs <- exceptT $ solve kb ast
     |> first (\err -> "SolveError: " ++ show err)
-  let
-    substsStr =
-      intercalate ", "
-      . map (\(k, v) -> gen k ++ " = " ++ gen v)
-      $ substs
-    result = (if substsStr == "" then "true" else substsStr) ++ "."
-  lift $ putStrLn result
+  let substsStr = showSubstsList substs
+  lift $ putStrLn $ "Result:\n" ++ substsStr
 
 repl :: KnowledgeBase -> IO ()
 repl kb = forever $ do

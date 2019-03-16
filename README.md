@@ -5,8 +5,6 @@ Prolog (its pure subset) interpreter in Haskell, written just for fun.
 ### Features
 
 - [x] Basic implementation
-- [ ] Backtracking
-- [ ] Non-determinism
 - [x] REPL
 - [x] List notation
 - [x] Infix notation
